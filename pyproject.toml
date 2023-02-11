@@ -46,5 +46,8 @@ profile = "black"
 [tool.maubot]
 maubot = "0.1.0"
 modules = ["headlines"]
-main_class = "HeadlinePlugin"
+main_class = "HeadlinesPlugin"
 database = false
+extra_files = [
+    "base-config.yaml"
+    ]

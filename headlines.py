@@ -35,7 +35,7 @@ class HeadlinesPlugin(Plugin):
     @command.argument("headline", pass_raw=True, required=True)
     async def handler(self, evt: MessageEvent, headline: str) -> None:
         self.log.debug("Looking up \"%s\"", headline)
-        url = lookup(self.http, self.config["newsapi_api_key"], headline)
+        url = await lookup(self.http, self.config["newsapi_api_key"], headline)
 
         if url:
             await evt.reply(url)
