@@ -10,9 +10,8 @@ class Config(BaseProxyConfig):
         helper.copy("newsapi_api_key")
 
 async def lookup(http, api_key, headline):
-    params = "&".join(f"{k}={v}" for k, v in {"q": headline, "sortBy": "popularity", "apiKey": api_key}.items())
+    params = "&".join(f"{k}={v}" for k, v in {"q": headline, "sortBy": "popularity", "apiKey": api_key, "pageSize": 1}.items())
     url = f"https://newsapi.org/v2/everything?{params}"
-    print(url)
 
     async with http.get(url) as response:
         response = await response.json()
