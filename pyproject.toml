@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "casavant.jeff.headlines"
-version = "1.0.0"
+version = "1.0.1"
 description = "Maubot plugin for looking up links for headlines"
 authors = ["Jeff Casavant <jeff.casavant@gmail.com>"]
 license = "MIT"
