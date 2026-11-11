@@ -10,6 +10,7 @@ class Config(BaseProxyConfig):
     def do_update(self, helper: ConfigUpdateHelper) -> None:
         helper.copy("newsapi_api_key")
 
+
 class HeadlinesPlugin(Plugin):
     async def start(self) -> None:
         await super().start()
@@ -20,7 +21,15 @@ class HeadlinesPlugin(Plugin):
         return Config
 
     async def lookup(self, http, api_key, headline):
-        params = "&".join(f"{k}={v}" for k, v in {"q": urllib.parse.quote(headline), "sortBy": "popularity", "apiKey": api_key, "pageSize": 1}.items())
+        params = "&".join(
+            f"{k}={v}"
+            for k, v in {
+                "q": urllib.parse.quote(headline),
+                "sortBy": "popularity",
+                "apiKey": api_key,
+                "pageSize": 1,
+            }.items()
+        )
         url = f"https://newsapi.org/v2/everything?{params}"
 
         self.log.debug("Getting %s", url)
@@ -37,7 +46,7 @@ class HeadlinesPlugin(Plugin):
     @command.new("findheadline")
     @command.argument("headline", pass_raw=True, required=True)
     async def handler(self, evt: MessageEvent, headline: str) -> None:
-        self.log.debug("Looking up \"%s\"", headline)
+        self.log.debug('Looking up "%s"', headline)
         url = await self.lookup(self.http, self.config["newsapi_api_key"], headline)
 
         if url:
